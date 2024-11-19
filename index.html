@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UBG 778</title>
+    <script type="module">
+        import('/Name/Name.js')
+            .then(module => document.title = module.pageTitle || "Default Title")
+            .catch(() => {
+                document.title = "Error - Could not load title";
+            });
+    </script>
     <link rel="icon" href="Icon/Icon.png" type="image/jpeg/png">
     <style>
         body {
