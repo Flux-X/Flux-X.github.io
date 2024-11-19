@@ -1,1 +1,1 @@
-export const pageTitle = "UBG 778";
+export const pageTitle = "GxmeHub v2";
