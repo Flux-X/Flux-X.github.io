@@ -1,52 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="referrer" content="origin">
-    <title>Clever | Select your School</title>
-    <link rel="shortcut icon" href="https://assets.clever.com/oauth/8dbbc03bb85d0fe1b1a33fad8ce18502dc13ed5e/favicon.ico?1">
-    <link rel="stylesheet" href="https://assets.clever.com/oauth/8dbbc03bb85d0fe1b1a33fad8ce18502dc13ed5e/vendor.js.css">
-    <link rel="stylesheet" href="https://assets.clever.com/oauth/8dbbc03bb85d0fe1b1a33fad8ce18502dc13ed5e/stylesheets/main.js.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom School Login</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS -->
 </head>
 <body>
     <div class="background-container"></div>
-    <div class="diagonal-overlay"></div>
+    <div class="overlay"></div>
     <div class="content">
-        <div id="react-server-root">
-            <div class="flexbox flex--direction--column PageContent DistrictPicker" data-reactroot="">
-                <h1 class="PageContent--title">Log in</h1>
-                <div class="flex--grow flexbox">
-                    <div class="PageContent--content">
-                        <h2>Search for your school</h2>
-                        <!-- Modified section starts here -->
-                        <form id="loginForm">
-                            <label for="schoolName">School name</label>
-                            <input 
-                                type="text" 
-                                id="schoolName" 
-                                placeholder="Type school name here..." 
-                                aria-label="School name"
-                            >
-                            <button type="submit">Log In</button>
-                        </form>
-                        <!-- Modified section ends here -->
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1>Log In</h1>
+        <h2>Find Your School</h2>
+        <form>
+            <label for="school-search">School Name</label>
+            <input type="text" id="school-search" placeholder="Type your school name here...">
+            <button type="submit">Search</button>
+        </form>
     </div>
-
-    <script>
-        // JavaScript logic to handle login
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            const schoolName = document.getElementById("schoolName").value.trim();
-            if (schoolName === "Nebula") {
-                window.location.href = "games.html"; // Redirect to games.html
-            } else {
-                alert("Invalid school name. Please try again."); // Handle incorrect input
-            }
-        });
-    </script>
 </body>
 </html>
