@@ -1,1 +1,1 @@
-const GameBaseUrl = "https://edug54.github.io";
+const GameBaseUrl = "https://tbug27.github.io";
