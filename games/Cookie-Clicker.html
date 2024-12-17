@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="module">
-        // Load the page title dynamically
         import('/Name/Name.js')
             .then(module => document.title = module.pageTitle || "Default Title")
-            .catch(() => document.title = "Error - Could not load title");
+            .catch(() => {
+                document.title = "Error - Could not load title";
+            });
     </script>
-    <link rel="icon" href="https://raw.githubusercontent.com/GxmeHub/GxmeHub.github.io/refs/heads/main/Icon/Icon.png" type="image/png">
+    <link rel="icon" href="https://raw.githubusercontent.com/GxmeHub/GxmeHub.github.io/refs/heads/main/Icon/Icon.png" type="image/jpeg">
     <style>
         body {
             margin: 0;
@@ -23,12 +24,18 @@
             background-attachment: fixed;
             position: relative;
         }
+        iframe {
+            width: 80%;
+            height: 80%;
+            border: none;
+            border-radius: 15px;
+        }
         .button-container {
             position: absolute;
             top: 20px;
             left: 20px;
         }
-        .button, .fullscreen, .open-blank {
+        .button, .fullscreen {
             background: rgba(255, 255, 255, 0.5);
             border: none;
             border-radius: 50px;
@@ -38,7 +45,7 @@
             margin-right: 10px;
             transition: background 0.3s;
         }
-        .button:hover, .fullscreen:hover, .open-blank:hover {
+        .button:hover, .fullscreen:hover {
             background: rgba(255, 255, 255, 0.7);
         }
     </style>
@@ -48,64 +55,36 @@
     <div class="button-container">
         <button class="button" onclick="window.location.href='/index.html'">Return To Home</button>
         <button class="fullscreen" onclick="toggleFullscreen()">Fullscreen</button>
-        <button class="open-blank" onclick="openInAboutBlank()">Open in about:blank</button>
     </div>
 
+    <iframe id="myIframe" src="" width="100%" height="100%"></iframe>
+
     <script>
-        // Game name (you can change this to load the desired game)
-        const gameName = 'Cookie-Clicker'; // Example game name
+        // Function to toggle fullscreen mode
+        function toggleFullscreen() {
+            const iframe = document.getElementById('myIframe');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) { // Firefox
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { // IE/Edge
+                iframe.msRequestFullscreen();
+            }
+        }
 
-        let gameUrl = '';
-
-        // Dynamically load GameUrl.js to get the base URL
+        // Dynamically load GameUrl.js and set the iframe src
         (function() {
             var script = document.createElement('script');
-            script.src = '/Name/GameUrl.js'; // Path to your GameUrl.js
+            script.src = '/Name/GameUrl.js'; // Path to GameUrl.js
             document.head.appendChild(script);
-
+            
             script.onload = function() {
-                // Use the GameBaseUrl from GameUrl.js
-                gameUrl = GameBaseUrl + '/' + gameName; 
-            };
-
-            script.onerror = function() {
-                console.error("Failed to load GameUrl.js");
+                var gameName = 'Cookie-Clicker'; // Replace with your game name
+                document.getElementById('myIframe').src = GameBaseUrl + '/' + gameName; // No /Name here
             };
         })();
-
-        // Function to open the game in about:blank with iframe
-        function openInAboutBlank() {
-            if (!gameUrl) {
-                alert("Game URL is not ready yet. Please try again.");
-                return;
-            }
-
-            // Open a new blank tab
-            const newTab = window.open('about:blank', '_blank');
-
-            // Add the iframe with the game URL
-            const iframe = newTab.document.createElement('iframe');
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.src = gameUrl;
-
-            // Append iframe to the new tab's body
-            newTab.document.body.style.margin = '0';
-            newTab.document.body.style.height = '100vh';
-            newTab.document.body.appendChild(iframe);
-        }
-
-        // Function to toggle fullscreen
-        function toggleFullscreen() {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
-                document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
-                document.documentElement.msRequestFullscreen();
-            }
-        }
     </script>
 </body>
 </html>
